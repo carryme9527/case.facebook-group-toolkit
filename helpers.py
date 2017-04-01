@@ -6,6 +6,11 @@ import facebook_util
 import requests
 from datetime import datetime, timedelta
 
+def get_token():
+    access_token = ''
+    with open(settings.data_token_filename) as fh:
+      access_token = fh.read()
+    return access_token
 
 def get_post_content(raw_id, access_token):
   url = facebook_util.api_url('/' + raw_id)

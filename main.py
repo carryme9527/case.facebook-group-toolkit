@@ -2,20 +2,20 @@
 
 import settings
 from time import sleep
-from helpers import get_data
+from helpers import get_data, get_token
 from flask import Flask, render_template, request, redirect
 app = Flask(__name__, static_folder=settings.server_static)
 
 access_token = ''
 
 @app.route('/')
-def set_token():
+def index():
   title = settings.website_title
   header = settings.website_sidebar_menu[request.path]
   return render_template('set_token.html', title=title, header=header)
 
 @app.route('/', methods=['POST'])
-def get_token():
+def set_token():
   global access_token
   access_token = request.form['token']
   with open('token', 'w') as fh:
@@ -35,8 +35,7 @@ def comments():
                           data=data)
 
 if __name__ == '__main__':
-    with open(settings.data_token_filename) as fh:
-      access_token = fh.read()
+    access_token = get_token()
 
     app.run(
       host=settings.server_host,
