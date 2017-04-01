@@ -8,7 +8,7 @@ def get_token():
     return access_token
 
 def set_token(access_token):
-    with open('token', 'w') as fh:
+    with open(settings.data_token_filename, 'w') as fh:
         fh.write(access_token)
 
 def time_limit(hours=24):
