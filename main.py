@@ -7,6 +7,7 @@ import utils
 from flask import Flask, render_template, request, redirect
 app = Flask(__name__, static_folder=settings.server_static)
 
+global access_token
 access_token = ''
 
 @app.route('/')
@@ -17,7 +18,6 @@ def index():
 
 @app.route('/', methods=['POST'])
 def set_token():
-  global access_token
   access_token = request.form['token']
   utils.set_token(access_token)
   return redirect('/comments')
@@ -35,7 +35,6 @@ def comments():
                           data=data)
 
 if __name__ == '__main__':
-    global access_token
     access_token = utils.get_token()
 
     app.run(
