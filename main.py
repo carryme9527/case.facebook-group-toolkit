@@ -2,7 +2,8 @@
 
 import settings
 from time import sleep
-from helpers import get_data, get_token
+from helpers import get_data
+import utils
 from flask import Flask, render_template, request, redirect
 app = Flask(__name__, static_folder=settings.server_static)
 
@@ -18,8 +19,7 @@ def index():
 def set_token():
   global access_token
   access_token = request.form['token']
-  with open('token', 'w') as fh:
-    fh.write(access_token)
+  utils.set_token(access_token)
   return redirect('/comments')
 
 @app.route('/comments')
@@ -35,7 +35,8 @@ def comments():
                           data=data)
 
 if __name__ == '__main__':
-    access_token = get_token()
+    global access_token
+    access_token = utils.get_token()
 
     app.run(
       host=settings.server_host,
