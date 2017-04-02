@@ -19,7 +19,7 @@ for pid in open('post_ids'):
             continue
         if not utils.is_in_24_hours(comment['created_time']):
             continue
-        results.append((pid, comment['id'], uid, comment['created_time']))
+        results.append((pid, comment['id'], comment['from']['id'], comment['created_time']))
 
 for r in results:
     pid, cid, uid, ct = r

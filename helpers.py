@@ -32,6 +32,7 @@ def parse(data, access_token):
       message = comment['message']
       comment_url = facebook_util.group_comment_url(group_id, post_id, comment['id'])
 
+      time = utils.parse_time(comment['created_time'])
       returned.append((from_name, user_url, message, time, comment_url))
     if len(returned) > 0:
       results[(post_url, get_post_content(row['id'], access_token), len(returned) + 1)] = returned
