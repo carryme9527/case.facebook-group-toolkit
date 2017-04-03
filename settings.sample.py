@@ -8,6 +8,7 @@ server_debug = True
 data_token_filename = 'token'
 
 facebook_domain = 'https://graph.facebook.com' 
+facebook_domain = 'https://www.facebook.com' 
 facebook_api_version = '/v2.8'
 facebook_user_id = ''
 facebook_group_id = ''
