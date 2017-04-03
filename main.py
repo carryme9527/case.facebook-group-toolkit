@@ -1,9 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-import settings
-from time import sleep
-from helpers import get_data
 import utils
+import settings
+from helpers import get_data
 from flask import Flask, render_template, request, redirect
 app = Flask(__name__, static_folder=settings.server_static)
 

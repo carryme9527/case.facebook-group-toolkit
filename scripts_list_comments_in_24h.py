@@ -1,8 +1,4 @@
-import re
-import json
 import utils
-import settings
-import requests
 import facebook_util
 
 access_token = utils.get_token()
