@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 
+import os
 import utils
+import pickle
 import settings
 from helpers import get_data
 from flask import Flask, render_template, request, redirect
@@ -26,6 +28,22 @@ def comments():
   title = settings.website_title
   header = settings.website_sidebar_menu[request.path]
   data = get_data(access_token)
+  size = len(data)
+  return render_template('index.html',
+                          title=title,
+                          header=header,
+                          size=size,
+                          data=data)
+
+@app.route('/crontab')
+def crontab():
+
+  folder = 'history/comment/'
+  fn = os.listdir(folder)[-1]
+  filename = folder + fn
+  title = settings.website_title
+  header = settings.website_sidebar_menu[request.path] + '(%s)' % fn.split('.')[0]
+  data = pickle.load(open(filename))
   size = len(data)
   return render_template('index.html',
                           title=title,
