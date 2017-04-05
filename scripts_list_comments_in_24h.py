@@ -1,10 +1,16 @@
+import os
 import utils
+import pickle
+import datetime
 import facebook_util
 
 access_token = utils.get_token()
 
+folder = 'history/post/'
+filename = folder + os.listdir(folder)[-1]
+
 results = []
-for pid in open('post_ids'):
+for pid in pickle.load(open(filename)):
     pid = pid.strip()
     path = '/{0}'.format(pid)
     resp = facebook_util.get_comments_order_by_time(path, access_token)
@@ -15,8 +21,6 @@ for pid in open('post_ids'):
             continue
         if not utils.is_in_24_hours(comment['created_time']):
             continue
-        results.append((pid, comment['id'], comment['from']['id'], comment['created_time']))
+        results.append((pid, resp['message'], comment['id'], comment['from']['id'], comment['created_time']))
 
-for r in results:
-    pid, cid, uid, ct = r
-    print pid, cid, uid, ct
+pickle.dump(results, open('history/comment/%s.pkl' % datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S'), 'w'))

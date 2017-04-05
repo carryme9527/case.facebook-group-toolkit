@@ -18,7 +18,7 @@ def user_url(uid):
 
 def get_comments_order_by_time(path, access_token):
   url = api_url(path)
-  params = { 'fields': 'comments.order(reverse_chronological)' }
+  params = { 'fields': 'message,comments.order(reverse_chronological)' }
   resp = requests.get(url, params = params).text
   return request(path, access_token, params)
 
