@@ -17,4 +17,5 @@ website_title = u'臉書社團工具'
 website_sidebar_menu = {
     '/': u'設定存取權杖',
     '/comments': u'24小時內留言',
+    '/crontab': u'測試版24小時留言檢查',
 }
